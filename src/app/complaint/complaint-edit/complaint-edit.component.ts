@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NewComplaint } from '../new-complaint';
+import { NgForm } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
+import { ComplaintService } from '../complaint.service';
 
 @Component({
   selector: 'szia-complaint-edit',
@@ -10,11 +13,20 @@ export class ComplaintEditComponent implements OnInit {
   complaint = new NewComplaint();
   urlValidationPattern =
     '^(?:http(s)?:\\/\\/)?[\\w.-]+(?:\\.[\\w\\.-]+)+[\\w\\-\\._~:/?#[\\]@!\\$&\'\\(\\)\\*\\+,;=.]+$';
+  @ViewChild('form') private form: NgForm;
 
-  constructor() {}
+  constructor(private complaintService: ComplaintService, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    this.complaint.name = 'Teszt'
+    this.complaint.name = 'Teszt';
+  }
+
+  submitted() {
+    this.complaintService.saveComplaint(this.complaint).subscribe(() => {
+      this.snackBar.open('Complaint saved', 'OK');
+      this.complaint = new NewComplaint();
+      this.form.resetForm();
+    });
   }
 
 }
