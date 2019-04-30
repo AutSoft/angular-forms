@@ -2,26 +2,27 @@
   <form fxFlex="70%" fxFlex.lt-sm="100%" fxLayout="column" fxLayoutAlign="center stretch">
     <h2>Customer info</h2>
     <mat-form-field>
-      <input matInput placeholder="Name">
+      <input matInput placeholder="Name" [(ngModel)]="complaint.name" name="name">
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Email">
+      <input matInput placeholder="Email" [(ngModel)]="complaint.email" name="email">
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Phone">
+      <input matInput placeholder="Phone" [(ngModel)]="complaint.phoneNumber" name="phoneNumber">
     </mat-form-field>
     <h2>Complaint info</h2>
     <mat-form-field>
-      <input matInput placeholder="Subject">
+      <input matInput placeholder="Subject" [(ngModel)]="complaint.subject" name="subject">
     </mat-form-field>
     <mat-form-field>
-      <textarea matInput placeholder="Content" rows="2"></textarea>
+      <textarea matInput placeholder="Content" rows="2" [(ngModel)]="complaint.content" name="content"></textarea>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Image URL">
+      <input matInput placeholder="Image URL" [(ngModel)]="complaint.imageSource" name="imageSource">
     </mat-form-field>
     <button fxFlexAlign="start" fxFlexAlign.lt-sm="stretch" mat-raised-button color="primary">
       Submit
     </button>
   </form>
 </div>
+{{complaint | json}}

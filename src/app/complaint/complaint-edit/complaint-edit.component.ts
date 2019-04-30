@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NewComplaint } from '../new-complaint';
 
 @Component({
   selector: 'szia-complaint-edit',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./complaint-edit.component.scss']
 })
 export class ComplaintEditComponent implements OnInit {
+  complaint = new NewComplaint();
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
+    this.complaint.name = 'Teszt'
   }
 
 }
