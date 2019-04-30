@@ -14,9 +14,10 @@ import {
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
+import { ComplaintEditComponent } from './complaint-edit/complaint-edit.component';
 
 @NgModule({
-  declarations: [ComplaintComponent, ComplaintListComponent],
+  declarations: [ComplaintComponent, ComplaintListComponent, ComplaintEditComponent],
   imports: [
     CommonModule,
     ComplaintRoutingModule,
