@@ -14,6 +14,7 @@ export class ComplaintEditComponent implements OnInit {
   urlValidationPattern =
     '^(?:http(s)?:\\/\\/)?[\\w.-]+(?:\\.[\\w\\.-]+)+[\\w\\-\\._~:/?#[\\]@!\\$&\'\\(\\)\\*\\+,;=.]+$';
   @ViewChild('form') private form: NgForm;
+  isLoading = false;
 
   constructor(private complaintService: ComplaintService, private snackBar: MatSnackBar) { }
 
@@ -22,11 +23,13 @@ export class ComplaintEditComponent implements OnInit {
   }
 
   submitted() {
+    this.isLoading = true;
     this.complaintService.saveComplaint(this.complaint).subscribe(() => {
+      this.isLoading = false;
       this.snackBar.open('Complaint saved', 'OK');
       this.complaint = new NewComplaint();
       this.form.resetForm();
-    });
+    }, () => this.isLoading = false);
   }
 
 }

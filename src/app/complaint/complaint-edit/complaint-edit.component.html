@@ -26,8 +26,11 @@
       <input matInput placeholder="Image URL" [pattern]="urlValidationPattern" [(ngModel)]="complaint.imageSource" name="imageSource" #imageSource="ngModel">
       <mat-error *ngIf="imageSource.hasError('pattern')">Provided image URL is not a valid URL</mat-error>
     </mat-form-field>
-    <button [disabled]="form.invalid" (click)="submitted()" fxFlexAlign="start" fxFlexAlign.lt-sm="stretch" mat-raised-button color="primary">
-      Submit
-    </button>
+    <div fxFlexAlign="start" fxFlexAlign.lt-sm="stretch">
+      <button fxFlex [disabled]="form.invalid || isLoading" (click)="submitted()" mat-raised-button color="primary">
+        Submit
+      </button>
+      <mat-spinner fxFlex="none" *ngIf="isLoading" diameter="35"></mat-spinner>
+    </div>
   </form>
 </div>
