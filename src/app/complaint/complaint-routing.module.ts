@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ComplaintComponent } from './complaint/complaint.component';
 import { ComplaintListComponent } from './complaint-list/complaint-list.component';
 import { ComplaintEditComponent } from './complaint-edit/complaint-edit.component';
+import { CanDeactivateGuardService } from '../core/can-deactivate-guard.service';
 
 const routes: Routes = [
   {
@@ -15,7 +16,8 @@ const routes: Routes = [
       },
       {
         path: 'edit',
-        component: ComplaintEditComponent
+        component: ComplaintEditComponent,
+        canDeactivate: [CanDeactivateGuardService]
       }
     ]
   }

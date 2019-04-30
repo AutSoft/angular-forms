@@ -6,13 +6,14 @@ import { ComplaintService } from '../complaint.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { HasComponentUnsavedChanges } from '../../core/can-deactivate-guard.service';
 
 @Component({
   selector: 'szia-complaint-edit',
   templateUrl: './complaint-edit.component.html',
   styleUrls: ['./complaint-edit.component.scss']
 })
-export class ComplaintEditComponent implements OnInit {
+export class ComplaintEditComponent implements OnInit, HasComponentUnsavedChanges {
   complaint;
   urlValidationPattern =
     '^(?:http(s)?:\\/\\/)?[\\w.-]+(?:\\.[\\w\\.-]+)+[\\w\\-\\._~:/?#[\\]@!\\$&\'\\(\\)\\*\\+,;=.]+$';
@@ -53,6 +54,10 @@ export class ComplaintEditComponent implements OnInit {
         this.router.navigate(['..'], {relativeTo: this.route});
       }
     }, () => this.isLoading = false);
+  }
+
+  hasUnsavedChanges(): boolean {
+    return !this.form.pristine;
   }
 
 }
