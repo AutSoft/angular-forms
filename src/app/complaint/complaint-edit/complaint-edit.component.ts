@@ -8,6 +8,8 @@ import { NewComplaint } from '../new-complaint';
 })
 export class ComplaintEditComponent implements OnInit {
   complaint = new NewComplaint();
+  urlValidationPattern =
+    '^(?:http(s)?:\\/\\/)?[\\w.-]+(?:\\.[\\w\\.-]+)+[\\w\\-\\._~:/?#[\\]@!\\$&\'\\(\\)\\*\\+,;=.]+$';
 
   constructor() {}
 
