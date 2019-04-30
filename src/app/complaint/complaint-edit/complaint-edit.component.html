@@ -1,3 +1,27 @@
-<p>
-  complaint-edit works!
-</p>
+<div fxLayout="row" fxLayoutAlign="center center">
+  <form fxFlex="70%" fxFlex.lt-sm="100%" fxLayout="column" fxLayoutAlign="center stretch">
+    <h2>Customer info</h2>
+    <mat-form-field>
+      <input matInput placeholder="Name">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Email">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Phone">
+    </mat-form-field>
+    <h2>Complaint info</h2>
+    <mat-form-field>
+      <input matInput placeholder="Subject">
+    </mat-form-field>
+    <mat-form-field>
+      <textarea matInput placeholder="Content" rows="2"></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Image URL">
+    </mat-form-field>
+    <button fxFlexAlign="start" fxFlexAlign.lt-sm="stretch" mat-raised-button color="primary">
+      Submit
+    </button>
+  </form>
+</div>
