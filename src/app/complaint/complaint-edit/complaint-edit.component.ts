@@ -14,10 +14,8 @@ import { HasComponentUnsavedChanges } from '../../core/can-deactivate-guard.serv
   styleUrls: ['./complaint-edit.component.scss']
 })
 export class ComplaintEditComponent implements OnInit, HasComponentUnsavedChanges {
-  complaint;
   urlValidationPattern =
     '^(?:http(s)?:\\/\\/)?[\\w.-]+(?:\\.[\\w\\.-]+)+[\\w\\-\\._~:/?#[\\]@!\\$&\'\\(\\)\\*\\+,;=.]+$';
-  @ViewChild('form') private form: NgForm;
   isLoading = false;
   private isNew: boolean;
   private complaintId: number;
@@ -39,17 +37,18 @@ export class ComplaintEditComponent implements OnInit, HasComponentUnsavedChange
         this.isNew = true;
         return of(new NewComplaint());
       }
-    })).subscribe(complaint => this.complaint = complaint);
+    })).subscribe(complaint => {});
+    // TODO: load data into form
   }
 
   submitted() {
     this.isLoading = true;
     const action = this.isNew ?
-      this.complaintService.saveComplaint(this.complaint) : this.complaintService.updateComplaint(this.complaintId, this.complaint);
+      this.complaintService.saveComplaint(null) : this.complaintService.updateComplaint(this.complaintId, null);
     action.subscribe(() => {
       this.isLoading = false;
       this.snackBar.open('Complaint saved', 'OK');
-      this.form.resetForm();
+      // TODO: reset form
       if (!this.isNew) {
         this.router.navigate(['..'], {relativeTo: this.route});
       }
@@ -57,7 +56,8 @@ export class ComplaintEditComponent implements OnInit, HasComponentUnsavedChange
   }
 
   hasUnsavedChanges(): boolean {
-    return !this.form.pristine;
+    // TODO: check if form is pristine
+    return false;
   }
 
 }
