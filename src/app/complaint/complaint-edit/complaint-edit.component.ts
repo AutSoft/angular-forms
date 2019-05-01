@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NewComplaint } from '../new-complaint';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { ComplaintService } from '../complaint.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -14,6 +14,7 @@ import { HasComponentUnsavedChanges } from '../../core/can-deactivate-guard.serv
   styleUrls: ['./complaint-edit.component.scss']
 })
 export class ComplaintEditComponent implements OnInit, HasComponentUnsavedChanges {
+  form: FormGroup;
   urlValidationPattern =
     '^(?:http(s)?:\\/\\/)?[\\w.-]+(?:\\.[\\w\\.-]+)+[\\w\\-\\._~:/?#[\\]@!\\$&\'\\(\\)\\*\\+,;=.]+$';
   isLoading = false;
@@ -24,8 +25,18 @@ export class ComplaintEditComponent implements OnInit, HasComponentUnsavedChange
     private complaintService: ComplaintService,
     private snackBar: MatSnackBar,
     private route: ActivatedRoute,
-    private router: Router
-  ) { }
+    private router: Router,
+    formBuilder: FormBuilder
+  ) {
+    this.form = formBuilder.group({
+      name: [ undefined, Validators.required ],
+      email: [ undefined, [ Validators.required, Validators.email ] ],
+      phoneNumber: [ undefined ],
+      subject: [ undefined, [ Validators.required, Validators.maxLength(30) ] ],
+      content: [ undefined ],
+      imageSource: [ undefined, Validators.pattern(this.urlValidationPattern) ]
+    });
+  }
 
   ngOnInit() {
     this.route.queryParams.pipe(switchMap((params) => {
@@ -37,8 +48,7 @@ export class ComplaintEditComponent implements OnInit, HasComponentUnsavedChange
         this.isNew = true;
         return of(new NewComplaint());
       }
-    })).subscribe(complaint => {});
-    // TODO: load data into form
+    })).subscribe(complaint => this.form.patchValue(complaint));
   }
 
   submitted() {
@@ -48,7 +58,7 @@ export class ComplaintEditComponent implements OnInit, HasComponentUnsavedChange
     action.subscribe(() => {
       this.isLoading = false;
       this.snackBar.open('Complaint saved', 'OK');
-      // TODO: reset form
+      this.form.reset();
       if (!this.isNew) {
         this.router.navigate(['..'], {relativeTo: this.route});
       }
@@ -56,8 +66,7 @@ export class ComplaintEditComponent implements OnInit, HasComponentUnsavedChange
   }
 
   hasUnsavedChanges(): boolean {
-    // TODO: check if form is pristine
-    return false;
+    return !this.form.pristine;
   }
 
 }

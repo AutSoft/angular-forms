@@ -10,7 +10,7 @@ import { NewComplaint } from './new-complaint';
 export class ComplaintService {
   private baseUrl = `${environment.baseUrl}/Complaints`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getComplaints() {
     return this.http.get<Complaint[]>(this.baseUrl);

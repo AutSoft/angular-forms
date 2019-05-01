@@ -13,7 +13,7 @@ import {
   MatProgressSpinnerModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ComplaintEditComponent } from './complaint-edit/complaint-edit.component';
 
 @NgModule({
@@ -26,6 +26,7 @@ import { ComplaintEditComponent } from './complaint-edit/complaint-edit.componen
     FlexLayoutModule,
     MatButtonModule,
     FormsModule,
+    ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatProgressSpinnerModule
