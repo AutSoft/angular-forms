@@ -54,7 +54,7 @@ export class ComplaintEditComponent implements OnInit, HasComponentUnsavedChange
   submitted() {
     this.isLoading = true;
     const action = this.isNew ?
-      this.complaintService.saveComplaint(null) : this.complaintService.updateComplaint(this.complaintId, null);
+      this.complaintService.saveComplaint(this.form.value) : this.complaintService.updateComplaint(this.complaintId, this.form.value);
     action.subscribe(() => {
       this.isLoading = false;
       this.snackBar.open('Complaint saved', 'OK');

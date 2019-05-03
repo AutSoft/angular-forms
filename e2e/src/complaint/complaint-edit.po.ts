@@ -7,7 +7,7 @@ export const complaintEditPage = {
     await complaintListPage.getAddComplaintButton().click();
   },
 
-  getNameInput: () => element(by.name('name')),
+  getNameInput: () => element(by.name('title')),
 
   getEmailInput: () => element(by.name('email')),
 
